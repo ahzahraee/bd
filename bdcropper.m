@@ -11,6 +11,8 @@ border_bottom = 10;
 inputimageformat = '*.jpg';
 outputimageformat = '.jpg';
 
+from = 0 
+to = 0 
 
 %read image
 filePath = uigetdir %input files dir
@@ -20,8 +22,12 @@ outPath = uigetdir %output files dir
 imagefiles=dir(fullfile(filePath,inputimageformat)); %struct array of input files
 npages = length(imagefiles) %number of pages
 
-
 for im = 1:npages
+
+if (from != 0 && im<from) || (to != 0 && im>to)
+  # printf("passing image %d\n",im);
+  continue;
+endif
 
 filenameIn = imagefiles(im).name;    %char array
 fullFilename = fullfile(filePath,filenameIn); %string
