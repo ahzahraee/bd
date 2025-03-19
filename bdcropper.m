@@ -39,7 +39,11 @@ h = size(a,1);
 w = size(a,2);
 
 %find white rows, return them in a vector of 0,1
-wr = whiteRows(a,w,h,whthreshold);
+try
+  wr = whiteRows(a,w,h,whthreshold);
+catch
+  printf("%s Image is probably black and white. Remove it from pages.\n",filenameIn);
+end
 
 %find clusers of white rows:
     %find rising edge i.e start of white cluster, gets starting row as an
